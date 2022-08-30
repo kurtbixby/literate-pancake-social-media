@@ -56,7 +56,10 @@ async function updateUserHandler(req, res) {
         const user = await User.findOneAndUpdate(
             { _id: req.params.userId },
             { $set: update },
-            { runValidators: true }
+            {
+                runValidators: true,
+                returnOriginal: false
+            }
         );
 
         if (!user) {
@@ -107,7 +110,10 @@ async function addFriendHandler(req, res) {
         const user = await User.findOneAndUpdate(
             { _id: req.params.userId },
             { $push: {friends: friend._id} },
-            { runValidators: true }
+            {
+                runValidators: true,
+                returnOriginal: false
+            }
         );
         
         if (!user) {
@@ -127,7 +133,10 @@ async function removeFriendHandler(req, res) {
         const user = await User.findOneAndUpdate(
             { _id: req.params.userId },
             { $pull: {friends: req.params.friendId} },
-            { runValidators: true }
+            {
+                runValidators: true,
+                returnOriginal: false
+            }
         );
         
         if (!user) {
