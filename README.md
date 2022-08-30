@@ -7,14 +7,13 @@
 A command line frontend for managing a social media site's MongoDB data store. A video demonstration of this application can be found on [YouTube](https://youtu.be/sSqVHmACGvs).
 
 Functionality includes:
-* Adding a department, employee, or role
-* Deleting a department, employee, or role
-* Listing all departments, employees, or roles
-* Listing a department's employees
-* Displaying a department's budget
-* Displaying an employee's direct reports
-* Changing an employee's manager
-* Changing an employee's role
+* Listing all users
+* Listing a user's details
+* Creating and deleting a user
+* Creating and removing friendships between users
+* Listing all thoughts
+* Creating and deleting a thought
+* Creating and deleting a reaction to a thought
 
 ## Table of Contents
 
