@@ -111,7 +111,7 @@ async function deleteThoughtHandler(req, res) {
 }
 
 async function createReactionHandler(req, res) {
-    const { reactionBody, username } = req.body.params;
+    const { reactionBody, username } = req.body;
 
     if (!(reactionBody && username)) {
         res.status(401).json({message: 'Bad request'});
@@ -145,12 +145,13 @@ async function deleteReactionHandler(req, res) {
     try {
         const thought = await Thought.findOneAndUpdate(
             { _id: req.params.thoughtId },
-            { $pull: {reactions: req.params.reactionId}},
+            { $pull: {reactions: {_id: req.params.reactionId}}},
             {
                 runValidators: true,
                 returnOriginal: false
             }
-        );
+        )
+        .populate({path: 'reactions', select: '_id'});
         
         if (!thought) {
             res.status(404).json({message: 'Invalid thought id'});

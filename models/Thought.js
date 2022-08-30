@@ -1,13 +1,14 @@
 export { Thought };
 
 import mongoose from 'mongoose';
+import { formatTimeString } from '../util/helpers.js';
 const { Schema, model } = mongoose;
 
 const reactionSchema = new Schema(
     {
         reactionId: {
             type: Schema.Types.ObjectId,
-            default: () => new Types.ObjectId()
+            default: () => new mongoose.Types.ObjectId()
         },
         reactionBody: {
             type: String,
@@ -20,12 +21,14 @@ const reactionSchema = new Schema(
         },
         createdAt: {
             type: Date,
-            default: Date.now
+            default: Date.now,
+            get: formatTimeString
         }
     },
     {
         toJSON: {
             virtuals: true,
+            getters: true
         },
         id: false
     }
@@ -41,7 +44,8 @@ const thoughtSchema = new Schema(
         },
         createdAt: {
             type: Date,
-            default: Date.now
+            default: Date.now,
+            get: formatTimeString
         },
         username: {
             type: String,
@@ -52,6 +56,7 @@ const thoughtSchema = new Schema(
     {
         toJSON: {
             virtuals: true,
+            getters: true
         }
     }
 )
