@@ -17,7 +17,8 @@ async function getUsersHandler(req, res) {
 async function getAUserHandler(req, res) {
     try {
         const user = await User.findById(req.params.userId, '-id -__v')
-        .populate({path: 'friends', select: '-__v'});
+        .populate({path: 'friends', select: '-__v'})
+        .populate({path: 'thoughts', select: '-__v'});
         if (!user) {
             res.status(404).json({message: 'Invalid user id'});
             return;
@@ -89,8 +90,6 @@ async function deleteUserHandler(req, res) {
             username: user.username
         });
 
-        console.log(thoughts);
-
         res.json({message: 'User deleted successfully'});
     } catch (err) {
         console.error(err);
@@ -143,8 +142,6 @@ async function removeFriendHandler(req, res) {
             res.status(404).json({message: 'Invalid user id'});
             return;
         }
-        // user.friends.id(req.params.friendId).remove();
-        // user.save();
         
         res.json({message: 'Friend removed successfully'});
     } catch (err) {

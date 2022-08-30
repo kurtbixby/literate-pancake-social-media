@@ -33,7 +33,7 @@ async function createThoughtHandler(req, res) {
         const thought = await Thought.create({thoughtText, username});
 
         await User.findOneAndUpdate(
-            { _id: req.params.userId },
+            { _id: userId },
             { $push: {thoughts: thought._id} },
             { runValidators: true }
         );
